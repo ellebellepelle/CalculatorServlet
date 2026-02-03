@@ -11,16 +11,16 @@
 <form action="${pageContext.request.contextPath}/calc" method="POST">
 
     <label for="principal-amount">Principal Amount: </label>
-    <input id="principal-amount" type="number" name="principal-amount">
+    <input id="principal-amount" type="number" name="principal-amount" value="${pa}">
 
     <label for="interest">Interest Percentage: </label>
-    <input id="interest" type="number" min="1" max="100" name="interest">
+    <input id="interest" type="number" min="1" max="100" name="interest" value="${ia}">
 
     <label for="years"># of Years: </label>
-    <input id="years" type="number" name="years">
+    <input id="years" type="number" name="years" value="${y}">
 
     <label for="compoundingperiod">Times per Year: </label>
-    <input id="compoundingperiod" type="number" name="compoundingperiod">
+    <input id="compoundingperiod" type="number" name="compoundingperiod" value="${cp}">
 
     <button type="submit">Calculate</button>
 

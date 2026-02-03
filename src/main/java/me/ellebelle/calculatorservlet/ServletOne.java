@@ -13,13 +13,6 @@ import static java.lang.Integer.parseInt;
 @WebServlet(name = "ServletOne", urlPatterns = {"/calc"})
 public class ServletOne extends HttpServlet {
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        // efter att jag servleten är klar, visa index.jsp för användaren.
-    getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
-
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,11 +21,11 @@ public class ServletOne extends HttpServlet {
 
 
         String principleAmount = req.getParameter("principal-amount");
-String interestAmount = req.getParameter("interest");
-String years = req.getParameter("years");
-String compoundingperiod = req.getParameter("compoundingperiod");
+        String interestAmount = req.getParameter("interest");
+        String years = req.getParameter("years");
+        String compoundingperiod = req.getParameter("compoundingperiod");
 
-String error;
+        String error;
 
 if (principleAmount == null || principleAmount.isBlank() || interestAmount == null || interestAmount.isBlank() || years == null || years.isBlank() || compoundingperiod == null || compoundingperiod.isBlank()) {
 error = "One of the parameters is blank, try again.";
@@ -46,12 +39,27 @@ req.setAttribute("error", error);
             Integer.parseInt(years),
             Integer.parseInt(compoundingperiod));
 
-req.setAttribute("result", result);
-}
+    req.setAttribute("result", result);
+    }
+
+req.setAttribute("pa", principleAmount);
+req.setAttribute("ia", interestAmount);
+req.setAttribute("y", years);
+req.setAttribute("cp", compoundingperiod);
 
         // efter att jag servleten är klar, visa index.jsp för användaren.
+        // jag forwardar den tillbaka till min sida med detta:
 getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
 
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        // efter att jag servleten är klar, visa index.jsp för användaren.
+        getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+
+    }
+
 }
 
