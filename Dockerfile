@@ -3,12 +3,9 @@ WORKDIR /app
 
 COPY pom.xml .
 COPY .mvn .mvn
-COPY mvnw .
-COPY mvnw.cmd .
 COPY src src
 
-RUN chmod +x mvnw || true
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
 FROM tomcat:11.0-jdk21-temurin
 
